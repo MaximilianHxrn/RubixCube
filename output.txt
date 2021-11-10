@@ -1,43 +1,25 @@
                        WHITE WHITE WHITE
                        WHITE WHITE WHITE
                        WHITE WHITE WHITE
-BLUE BLUE BLUE       | RED RED RED          | GREEN GREEN GREEN     | ORANGE ORANGE ORANGE
-BLUE BLUE BLUE       | RED RED RED          | GREEN GREEN GREEN     | ORANGE ORANGE ORANGE
-BLUE BLUE BLUE       | RED RED RED          | GREEN GREEN GREEN     | ORANGE ORANGE ORANGE
+GREEN GREEN GREEN    | RED RED RED          | BLUE BLUE BLUE        | ORANGE ORANGE ORANGE
+GREEN GREEN GREEN    | RED RED RED          | BLUE BLUE BLUE        | ORANGE ORANGE ORANGE
+GREEN GREEN GREEN    | RED RED RED          | BLUE BLUE BLUE        | ORANGE ORANGE ORANGE
                        YELLOW YELLOW YELLOW
                        YELLOW YELLOW YELLOW
                        YELLOW YELLOW YELLOW
 
-Before:
-                       WHITE WHITE WHITE
-                       WHITE WHITE WHITE
-                       WHITE WHITE WHITE
-RED RED RED          | GREEN GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE BLUE
-RED RED RED          | GREEN GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE BLUE
-RED RED RED          | GREEN GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE BLUE
-                       YELLOW YELLOW YELLOW
-                       YELLOW YELLOW YELLOW
-                       YELLOW YELLOW YELLOW
-
-After:
-                       BLUE WHITE WHITE
-                       BLUE WHITE WHITE
-                       BLUE WHITE WHITE
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-                       GREEN YELLOW YELLOW
-                       GREEN YELLOW YELLOW
-                       GREEN YELLOW YELLOW
-
-Before:
-                       WHITE WHITE BLUE
-                       WHITE WHITE BLUE
-                       WHITE WHITE BLUE
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-RED RED RED          | WHITE GREEN GREEN    | ORANGE ORANGE ORANGE  | BLUE BLUE YELLOW
-                       YELLOW YELLOW GREEN
-                       YELLOW YELLOW GREEN
-                       YELLOW YELLOW GREEN
+F
+L
+L'
+F
+R
+                       WHITE WHITE RED
+                       WHITE WHITE RED
+                       YELLOW YELLOW RED
+GREEN GREEN BLUE     | RED RED WHITE        | GREEN GREEN GREEN     | YELLOW ORANGE ORANGE
+GREEN GREEN BLUE     | RED RED YELLOW       | BLUE BLUE BLUE        | WHITE ORANGE ORANGE
+GREEN GREEN BLUE     | RED RED YELLOW       | BLUE BLUE BLUE        | WHITE ORANGE ORANGE
+                       WHITE WHITE ORANGE
+                       YELLOW YELLOW ORANGE
+                       YELLOW YELLOW ORANGE
 

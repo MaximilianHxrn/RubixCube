@@ -11,8 +11,8 @@ public class Cube {
             for (int j = 0; j < 3; j++) {
                 up[i][j] = Color.WHITE;
                 front[i][j] = Color.RED;
-                left[i][j] = Color.BLUE;
-                right[i][j] = Color.GREEN;
+                left[i][j] = Color.GREEN;
+                right[i][j] = Color.BLUE;
                 back[i][j] = Color.ORANGE;
                 down[i][j] = Color.YELLOW;
             }

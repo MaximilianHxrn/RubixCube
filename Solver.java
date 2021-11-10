@@ -1,19 +1,111 @@
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Solver {
 
     private static Cube cube;
+    private static ArrayList<String> moves = new ArrayList<>();
 
     public static void main(String[] args) {
-        cube = new Cube();
         init();
         print();
-        rotate("F");
-        rotate("F'");
+        randomize();
+        makeMoves();
+        solve();
+        print();
+    }
+
+    private static void solve() {
+        cross();
+        f2l();
+        yCross();
+        corner();
+        turn();
+    }
+
+    private static void turn() {
+    }
+
+    private static void corner() {
+    }
+
+    private static void yCross() {
+    }
+
+    private static void f2l() {
+    }
+
+    private static void cross() {
+        findEdge(Color.WHITE);
+    }
+
+    private static String findEdge(Color one) {
+        // Front
+        if (cube.front[0][1] == one) {
+            if (cube.up[2][1] == Color.RED) {
+                moves.add("F'");
+                moves.add("L'");
+                moves.add("U'");
+            }
+            if (cube.up[2][1] == Color.BLUE) {
+                moves.add("F");
+                moves.add("R");
+            }
+            if (cube.up[2][1] == Color.GREEN) {
+                moves.add("F'");
+                moves.add("L'");
+            }
+            if (cube.up[2][1] == Color.ORANGE) {
+                moves.add("F'");
+                moves.add("L'");
+                moves.add("U");
+                moves.add("U");
+            }
+        }
+        if (cube.front[1][0] == one) {
+
+        }
+        if (cube.front[1][2] == one) {
+
+        }
+        if (cube.front[2][1] == one) {
+
+        }
+        // Left
+        if (cube.front[0][1] == one) {
+            
+        }
+        if (cube.front[1][0] == one) {
+
+        }
+        if (cube.front[1][2] == one) {
+
+        }
+        if (cube.front[2][1] == one) {
+
+        }
+    }
+
+    private static void randomize() {
+        String[] alphabet = { "U", "U'", "R", "R'", "F", "F'", "L", "L'", "B", "B'", "D", "D'" };
+        SecureRandom r = new SecureRandom();
+        for (int i = 0; i < 5; i++) {
+            moves.add(alphabet[r.nextInt(alphabet.length)]);
+            System.out.println(moves.get(i));
+        }
+    }
+
+    private static void makeMoves() {
+        for (String s : moves) {
+            rotate(s);
+        }
     }
 
     private static void init() {
+        cube = new Cube();
         PrintStream fileStream = null;
         try {
             fileStream = new PrintStream("output.txt");
@@ -90,9 +182,73 @@ public class Solver {
             cube.down = turnFace(cube.down);
             break;
         }
+        case "B":
+        case "B'": {
+            cube.left = temp.back;
+            cube.front = temp.left;
+            cube.right = temp.front;
+            cube.back = temp.right;
+            cube.up = turnFaceCCW(cube.up);
+            cube.down = turnFace(cube.down);
+            if (face.equals("B")) {
+                rotate(" ", true);
+            } else {
+                rotate(" ", false);
+            }
+            temp = new Cube(cube);
+            cube.front = temp.right;
+            cube.left = temp.front;
+            cube.back = temp.left;
+            cube.right = temp.back;
+            cube.up = turnFace(cube.up);
+            cube.down = turnFaceCCW(cube.down);
+            break;
+        }
+        case "U":
+        case "U'": {
+            cube.front = turnFaceCCW(cube.front);
+            cube.back = turnFace(cube.back);
+            cube.left = turnFace(temp.up);
+            cube.right = turnFace(temp.down);
+            cube.up = turnFace(temp.right);
+            cube.down = turnFace(temp.left);
+            if (face.equals("U")) {
+                rotate(" ", true);
+            } else {
+                rotate(" ", false);
+            }
+            temp = new Cube(cube);
+            cube.front = turnFace(cube.front);
+            cube.left = turnFaceCCW(temp.down);
+            cube.back = turnFaceCCW(cube.back);
+            cube.right = turnFaceCCW(temp.up);
+            cube.up = turnFaceCCW(temp.left);
+            cube.down = turnFaceCCW(temp.right);
+            break;
+        }
+        case "D":
+        case "D'": {
+            cube.left = turnFaceCCW(temp.down);
+            cube.front = turnFace(cube.front);
+            cube.back = turnFaceCCW(cube.back);
+            cube.right = turnFaceCCW(temp.up);
+            cube.up = turnFaceCCW(temp.left);
+            cube.down = turnFaceCCW(temp.right);
+            if (face.equals("D")) {
+                rotate(" ", true);
+            } else {
+                rotate(" ", false);
+            }
+            temp = new Cube(cube);
+            cube.front = turnFaceCCW(cube.front);
+            cube.back = turnFace(cube.back);
+            cube.left = turnFace(temp.up);
+            cube.right = turnFace(temp.down);
+            cube.down = turnFace(temp.left);
+            cube.up = turnFace(temp.right);
+            break;
+        }
         case " ": {
-            System.out.println("Before:");
-            print();
             if (forward) {
                 temp = new Cube(cube);
                 for (int i = 0; i < 3; i++) {
@@ -112,8 +268,6 @@ public class Solver {
                 }
                 cube.left = turnFaceCCW(cube.left);
             }
-            System.out.println("After:");
-            print();
             break;
         }
         }
@@ -131,32 +285,17 @@ public class Solver {
         return ret;
     }
 
-    public static Color[][] turnFaceCCW(Color[][] matrix) {
-        int n = matrix.length;
-        int half = n / 2;
+    public static Color[][] turnFace2(Color[][] mat) {
+        Color[][] ret = turnFace(mat);
+        ret = turnFace(ret);
+        return ret;
+    }
 
-        for (int layer = 0; layer < half; layer++) {
-            int first = layer;
-            int last = n - 1 - layer;
-
-            for (int i = first; i < last; i++) {
-                int offset = i - first;
-                int j = last - offset;
-                Color top = matrix[first][i]; // save top
-
-                // left -> top
-                matrix[first][i] = matrix[j][first];
-
-                // bottom -> left
-                matrix[j][first] = matrix[last][j];
-
-                // right -> bottom
-                matrix[last][j] = matrix[i][last];
-
-                // top -> right
-                matrix[i][last] = top; // right <- saved top
-            }
-        }
+    public static Color[][] turnFaceCCW(Color[][] in) {
+        Color[][] matrix = new Color[3][3];
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                matrix[3 - 1 - j][i] = in[i][j];
         return matrix;
     }
 }
